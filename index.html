@@ -14,162 +14,120 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   background: linear-gradient(135deg, #ffe6f0, #ffd1e8);
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 /* Floating hearts */
 .heart {
   position: absolute;
-  font-size: 22px;
-  animation: float 7s linear infinite;
-  opacity: 0.9;
+  font-size: 18px;
+  animation: float 8s linear infinite;
+  opacity: 0.7;
 }
 
 @keyframes float {
-  0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
-  100% { transform: translateY(-10vh) scale(1.3); opacity: 1; }
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
 }
 
 /* Sparkles */
 .sparkle {
   position: absolute;
-  font-size: 14px;
+  font-size: 12px;
   animation: sparkle 3s ease-in-out infinite;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 @keyframes sparkle {
-  0%,100% { transform: scale(0.5); opacity: 0.4; }
-  50% { transform: scale(1.2); opacity: 1; }
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }
 
-/* 💕 Confetti hearts */
+/* Confetti */
 .confetti-heart {
   position: fixed;
   pointer-events: none;
-  animation: confetti 2.5s ease-out forwards;
-  font-size: clamp(16px, 4vw, 22px);
+  font-size: 18px;
+  animation: confetti 2s ease-out forwards;
 }
 
 @keyframes confetti {
-  0% {
-    transform: translate(0,0) scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--x), var(--y)) scale(0.6) rotate(360deg);
-    opacity: 0;
-  }
+  from { transform: translate(0,0); opacity: 1; }
+  to { transform: translate(var(--x), var(--y)); opacity: 0; }
 }
 
 .container {
-  z-index: 2;
-  padding: 20px;
-  animation: pop 1s ease;
-}
-
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  z-index: 5;
+  width: 100%;
+  max-width: 420px;
+  padding: 25px;
+  text-align: center;
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.6rem;
   color: #ff4d88;
-  margin-bottom: 30px;
-  text-shadow: 0 0 15px #ffb3cc;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px #ffb3cc;
 }
 
 .buttons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 1.2rem;
+  width: 85%;
+  max-width: 260px;
+  padding: 14px;
+  font-size: 1.1rem;
   border: none;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border-radius: 35px;
 }
 
 #yes {
   background: #ff80bf;
   color: white;
   font-weight: bold;
-  box-shadow: 0 8px 25px rgba(255, 128, 191, 0.7);
-}
-
-#yes:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px #ff66a3;
+  box-shadow: 0 6px 18px rgba(255, 128, 191, 0.6);
 }
 
 #no {
   background: #ff4d4d;
   color: white;
-  position: fixed;
+  position: relative;
 }
 
 .result {
   display: none;
+  text-align: center;
 }
 
 .result h2 {
-  font-size: 2.3rem;
+  font-size: 1.7rem;
   color: #ff4d88;
-  margin-bottom: 20px;
-  text-shadow: 0 0 20px #ffb3cc;
+  margin-bottom: 15px;
 }
 
 .result img {
-  width: 260px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.6);
-  animation: cuddle 2s infinite;
+  width: 220px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(255, 105, 180, 0.5);
 }
 
-@keyframes cuddle {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
+/* Graffiti (lighter + cleaner) */
 .graffiti {
   position: absolute;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: #ff66a3;
-  opacity: 0.9;
-  font-weight: bold;
-  animation: fadeIn 1.5s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 0.9; transform: scale(1); }
-}
-
-/* 📱 Mobile fixes */
-@media (max-width: 600px) {
-  h1 { font-size: 1.6rem; }
-  .result h2 { font-size: 1.8rem; }
-  .buttons { flex-direction: column; gap: 15px; }
-  button { width: 80%; max-width: 260px; }
-  .result img { width: 220px; }
+  opacity: 0.5;
 }
 </style>
 </head>
@@ -178,6 +136,7 @@ button {
 
 <div class="container" id="main">
   <h1>YUVIKA, WILL YOU BE MY VALENTINE? 💕</h1>
+
   <div class="buttons">
     <button id="yes">YES 😋</button>
     <button id="no">NO 😠</button>
@@ -186,20 +145,19 @@ button {
 
 <div class="container result" id="result">
   <h2>HEHEHE I KNEW IT CUTUU 💗</h2>
-  <img src="https://s3.getstickerpack.com/storage/uploads/sticker-pack/71-abrazo/sticker_10.gif?a64b1b0c5115dc2e73f793756d1edd76&d=200x200" alt="Dudu and Bubu Hugging">
+  <img src="https://s3.getstickerpack.com/storage/uploads/sticker-pack/71-abrazo/sticker_10.gif?a64b1b0c5115dc2e73f793756d1edd76&d=200x200">
 </div>
 
 <script>
 /* Floating hearts */
 setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💗";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 8000);
-}, 300);
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💗";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 9000);
+}, 500);
 
 /* Sparkles */
 setInterval(() => {
@@ -210,50 +168,46 @@ setInterval(() => {
   s.style.top = Math.random() * 100 + "vh";
   document.body.appendChild(s);
   setTimeout(() => s.remove(), 3000);
-}, 500);
+}, 800);
 
 /* NO button escape (safe on phone) */
 const noBtn = document.getElementById("no");
-function moveNo() {
-  const padding = 20;
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-}
-noBtn.addEventListener("mouseover", moveNo);
 noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseover", moveNo);
 
-/* 💕 Confetti burst */
-function launchConfetti() {
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-  for (let i = 0; i < 40; i++) {
+function moveNo() {
+  const x = Math.random() * 60;
+  noBtn.style.transform = `translateX(${x}px)`;
+}
+
+/* Confetti */
+function confetti() {
+  for (let i = 0; i < 25; i++) {
     const c = document.createElement("div");
     c.className = "confetti-heart";
     c.innerText = "💕";
-    c.style.left = centerX + "px";
-    c.style.top = centerY + "px";
-    c.style.setProperty("--x", (Math.random() * 400 - 200) + "px");
-    c.style.setProperty("--y", (Math.random() * 400 - 200) + "px");
+    c.style.left = "50%";
+    c.style.top = "40%";
+    c.style.setProperty("--x", (Math.random()*300-150)+"px");
+    c.style.setProperty("--y", (Math.random()*300-150)+"px");
     document.body.appendChild(c);
-    setTimeout(() => c.remove(), 2500);
+    setTimeout(() => c.remove(), 2000);
   }
 }
 
 /* YES click */
 document.getElementById("yes").addEventListener("click", () => {
-  launchConfetti();
+  confetti();
   document.getElementById("main").style.display = "none";
   document.getElementById("result").style.display = "block";
 
-  const words = ["My LOVE 💕", "CUTUU", "MERE GULABJAMUN", "BEBIDOLL", "KUCHUPUCHU"];
-  for (let i = 0; i < 20; i++) {
+  const words = ["LOVE 💕", "CUTUU", "MINE 💗"];
+  for (let i = 0; i < 8; i++) {
     const g = document.createElement("div");
     g.className = "graffiti";
-    g.innerText = words[Math.floor(Math.random() * words.length)];
-    g.style.left = Math.random() * 100 + "vw";
-    g.style.top = Math.random() * 100 + "vh";
+    g.innerText = words[Math.floor(Math.random()*words.length)];
+    g.style.left = Math.random()*100 + "vw";
+    g.style.top = Math.random()*100 + "vh";
     document.body.appendChild(g);
   }
 });
