@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Love 💗</title>
+<title>Valentine 💗</title>
+
+<!-- 🎀 Comic Neue Font -->
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Comic Sans MS', 'Poppins', cursive;
+  font-family: 'Comic Neue', cursive;
 }
 
 body {
@@ -75,43 +78,43 @@ body {
 
 h1 {
   font-size: 2rem;
+  font-weight: 700;
   color: #ff4d88;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   text-shadow: 0 0 15px #ffb3cc;
 }
 
 .buttons {
   display: flex;
-  gap: 20px;
   justify-content: center;
+  gap: 20px;
 }
 
+/* Buttons */
 button {
   padding: 15px 30px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border: none;
   border-radius: 40px;
   cursor: pointer;
   transition: transform 0.2s ease;
-  touch-action: manipulation;
 }
 
 #yes {
   background: #ff80bf;
   color: white;
-  font-weight: bold;
-  box-shadow: 0 8px 25px rgba(255,128,191,0.6);
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(255,128,191,0.7);
 }
 
-#yes:active {
-  transform: scale(0.95);
+#yes:hover {
+  transform: scale(1.08);
 }
 
-/* NO button starts NORMAL */
 #no {
   background: #ff4d4d;
   color: white;
-  position: relative;
+  position: relative; /* ✅ FIX: normal flow initially */
 }
 
 .result {
@@ -119,13 +122,13 @@ button {
 }
 
 .result h2 {
-  font-size: 2rem;
+  font-size: 2.3rem;
   color: #ff4d88;
   margin-bottom: 20px;
 }
 
 .result img {
-  width: 230px;
+  width: 260px;
   border-radius: 20px;
   animation: cuddle 2s infinite;
 }
@@ -135,9 +138,9 @@ button {
   50% { transform: scale(1.05); }
 }
 
-/* Mobile fixes */
+/* Mobile */
 @media (max-width: 600px) {
-  h1 { font-size: 1.5rem; }
+  h1 { font-size: 1.6rem; }
   .buttons { flex-direction: column; gap: 15px; }
   button { width: 80%; max-width: 260px; }
 }
@@ -160,66 +163,29 @@ button {
 </div>
 
 <script>
-/* Floating hearts */
-setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerText = "💗";
-  h.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 7000);
-}, 350);
-
-/* Sparkles */
-setInterval(() => {
-  const s = document.createElement("div");
-  s.className = "sparkle";
-  s.innerText = "✨";
-  s.style.left = Math.random() * 100 + "vw";
-  s.style.top = Math.random() * 100 + "vh";
-  document.body.appendChild(s);
-  setTimeout(() => s.remove(), 2500);
-}, 600);
-
-/* NO button escape — mobile safe */
+/* NO button escape — SAFE & NO OVERLAP */
 const noBtn = document.getElementById("no");
-let moved = false;
+let activated = false;
 
 function moveNo() {
-  if (!moved) {
-    noBtn.style.position = "fixed";
-    moved = true;
+  if (!activated) {
+    noBtn.style.position = "fixed"; // switch only when escaping
+    activated = true;
   }
 
-  const margin = 30;
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - margin);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - margin);
+  const padding = 20;
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
 
-  noBtn.style.left = Math.max(10, x) + "px";
-  noBtn.style.top = Math.max(10, y) + "px";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
 
 noBtn.addEventListener("mouseover", moveNo);
 noBtn.addEventListener("touchstart", moveNo);
 
-/* Confetti */
-function launchConfetti() {
-  for (let i = 0; i < 35; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti-heart";
-    c.innerText = "💕";
-    c.style.left = "50vw";
-    c.style.top = "50vh";
-    c.style.setProperty("--x", (Math.random() * 300 - 150) + "px");
-    c.style.setProperty("--y", (Math.random() * 300 - 150) + "px");
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 2500);
-  }
-}
-
 /* YES click */
 document.getElementById("yes").addEventListener("click", () => {
-  launchConfetti();
   document.getElementById("main").style.display = "none";
   document.getElementById("result").style.display = "block";
 });
@@ -227,4 +193,3 @@ document.getElementById("yes").addEventListener("click", () => {
 
 </body>
 </html>
-
